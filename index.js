@@ -43,6 +43,9 @@ inquirer
 ])
 .then((answers) => {
   console.log("successfully created");
+  // const svgPageContent = generateSVG(answers) 
+  // fs.writeFile('logo.svg', svgPageContent, (err) =>
+  // err ? console.log(err) : console.log("successfully created logo"));
 })
 
 // .then((answers) => {
@@ -67,7 +70,7 @@ inquirer
 
 
 
-//I need inline prompts that ask fo ruser input for text color, shape, selection of shapes, and color of shapes.
+
 
 //I need to store the user's input in something
 
