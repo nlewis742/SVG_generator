@@ -15,62 +15,78 @@
 
 const inquirer = require("inquirer");
 const fs = require("fs");
+const { Circle, Triangle, Square } = require("./lib/Shape");
 
 inquirer
-.prompt([
-  {
-    type: "input",
-    name: "text",
-    message: "Write upto 3 letters for an acronym for your log",
-  },
-  {
-    type: "input",
-    name: "textColor",
-    message:
-      "what color would you like the text to be? Please enter a color keyword or hexidecimal.",
-  },
-  {
-    type: "list",
-    name: "shape",
-    message: "What shape would you like for the background color?",
-    choices: ["square", "circle", "triangle"],
-  },
-  {
-    type: "input",
-    name: "shapeColor",
-    messsage: "What color would you like the shape to be? Please enter a color keyword or hexidecimal."
-  },
-])
-.then((answers) => {
-  console.log("successfully created");
-  // const svgPageContent = generateSVG(answers) 
-  // fs.writeFile('logo.svg', svgPageContent, (err) =>
-  // err ? console.log(err) : console.log("successfully created logo"));
-})
+  .prompt([
+    {
+      type: "input",
+      name: "text",
+      message: "Write upto 3 letters for an acronym for your log",
+      maxLength: 3
+    },
+    {
+      type: "input",
+      name: "textColor",
+      message:
+        "what color would you like the text to be? Please enter a color keyword or hexidecimal.",
+    },
+    {
+      type: "list",
+      name: "shape",
+      message: "What shape would you like for the background color?",
+      choices: ["square", "circle", "triangle"],
+    },
+    {
+      type: "input",
+      name: "shapeColor",
+      messsage:
+        "What color would you like the shape to be? Please enter a color keyword or hexidecimal.",
+    },
+  ])
+  .then((data) => {
+    console.log("successfully created");
+    function createSVG(data) {
+      fs.writeFile("logo.svg", data, (err) =>
+        err ? console.log(err) : console.log("successfully created logo")
+      );
+    }
+
+    // const svgPageContent
+
+    const svg =
+         `<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+
+      ${data.shape}
+
+      
+      <text x="50%" y="50%" text-anchor="middle" fill=${data.textColor} dy=".3em">${data.text}</text>
+      </svg>`;
+      
+      createSVG(svg)
+    });
+
+    
+  
 
 // .then((answers) => {
 //     const svgPageContent = generateSVG(answers);
-    
+
 //     fs.writeFile('logo.svg', svgPageContent, (err) =>
 //     err ? console.log(err) : console.log('Successfully created logo.svg!'));
 //   })
-  
-  
-  // //I need established objects for text color, shape, selection of shapes and color of shapes for a user to pull from.
-  // function logo(text, textColor, shape, shapeColor) {
-  //   this.text = text;
-  //   this.textColor = textColor;
-  //   this.shape = shape;
-  //   this.shapeColor = shapeColor;
-  //   this.create = function () {
-  //       console.log("created");
-  //   }
-  // }
+
+// //I need established objects for text color, shape, selection of shapes and color of shapes for a user to pull from.
+// function logo(text, textColor, shape, shapeColor) {
+//   this.text = text;
+//   this.textColor = textColor;
+//   this.shape = shape;
+//   this.shapeColor = shapeColor;
+//   this.create = function () {
+//       console.log("created");
+//   }
+// }
 // //Constructor function to create objects containing properties "shapes", "text", "color"
-
-
-
-
 
 //I need to store the user's input in something
 
