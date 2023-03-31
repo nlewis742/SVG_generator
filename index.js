@@ -22,9 +22,9 @@ inquirer.registerPrompt("maxinput", MaxLengthInputPrompt)
 inquirer
   .prompt([
     {
-      type: "maxinput",
+      type: "maxinput-input",
       name: "text",
-      message: "Write upto 3 letters for an acronym for your log",
+      message: "Write upto 3 letters for an acronym for your logo.",
       maxLength: 3
     },
     {
@@ -47,46 +47,41 @@ inquirer
     },
   ])
   .then((data) => {
-    console.log("successfully created");
-    function createSVG(data) {
-      fs.writeFile("logo.svg", data, (err) =>
-        err ? console.log(err) : console.log("successfully created logo")
-      );
-    }
+    
+            function Shape(){
+            let shape;
+            switch (data.shape) {
+              case "square":
+                shape = new Square();
+                shape.shapeColor(data.shapeColor);
+              break;
+              case "circle":
+                shape = new Circle(data.shapeColor);
+              break;
+              case "triangle":
+                shape = new Triangle(data.shapeColor);
+              break;
+            }
+            return shape;
+          };
+        });
+    const svg =
+         `<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+  
+    
+      
+      <text x="50%" y="50%" text-anchor="middle" fill=${data.textColor} dy=".3em">${data.text}</text>
+      </svg>`;
+      function createSVG(data) {
+        fs.writeFile("logo.svg", data, (err) =>
+          err ? console.log(err) : console.log("successfully created logo"))
+      };
+
+    
 
     // const svgPageContent
-function init() {
-    inquirer.prompt(questions).then((data) => {
-      function Shape(){
-        let shape;
-        switch (Response.shape) {
-          case "square":
-            shape = new Square(Response.shapeColor);
-          break;
-          case "circle":
-            shape = new Circle(Response.shapeColor);
-          break;
-          case "triangle":
-            shape = new Triangle(Response.shapeColor);
-          break;
-        }
-        return shape;
-      }
-    });
-  }
-  const svg =
-       `<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
 
-    ${Shape(data.shape, data.shapeColor)}
-
-    
-    <text x="50%" y="50%" text-anchor="middle" fill=${data.textColor} dy=".3em">${data.text}</text>
-    </svg>`;
-    
-    createSVG(svg)
-  });
-
-  init();
+  // init();
     
   
 
