@@ -16,11 +16,13 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const { Circle, Triangle, Square } = require("./lib/Shape");
+const MaxLengthInputPrompt = require("inquirer-maxlength-input-prompt");
+inquirer.registerPrompt("maxinput", MaxLengthInputPrompt)
 
 inquirer
   .prompt([
     {
-      type: "input",
+      type: "maxinput",
       name: "text",
       message: "Write upto 3 letters for an acronym for your log",
       maxLength: 3
@@ -53,19 +55,38 @@ inquirer
     }
 
     // const svgPageContent
-
-    const svg =
-         `<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
-
-      ${data.shape}
-
-      
-      <text x="50%" y="50%" text-anchor="middle" fill=${data.textColor} dy=".3em">${data.text}</text>
-      </svg>`;
-      
-      createSVG(svg)
+function init() {
+    inquirer.prompt(questions).then((data) => {
+      function Shape(){
+        let shape;
+        switch (Response.shape) {
+          case "square":
+            shape = new Square(Response.shapeColor);
+          break;
+          case "circle":
+            shape = new Circle(Response.shapeColor);
+          break;
+          case "triangle":
+            shape = new Triangle(Response.shapeColor);
+          break;
+        }
+        return shape;
+      }
     });
+  }
+  const svg =
+       `<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
 
+    ${Shape(data.shape, data.shapeColor)}
+
+    
+    <text x="50%" y="50%" text-anchor="middle" fill=${data.textColor} dy=".3em">${data.text}</text>
+    </svg>`;
+    
+    createSVG(svg)
+  });
+
+  init();
     
   
 
