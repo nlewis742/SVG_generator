@@ -1,6 +1,6 @@
 <svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
           
-          <rect x="125" y="75" width="100" height="100" fill="blue" />
+          <circle cx="150" cy="120" r="80" fill="blue" />
           
-          <text x="50%" y="50%" text-anchor="middle" fill=yellow dy=".3em">CCC</text>
+          <text x="50%" y="50%" text-anchor="middle" fill=yellow dy=".3em">TTT</text>
           </svg>
