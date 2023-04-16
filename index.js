@@ -73,6 +73,7 @@ inquirer
           const svg =
           `<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
           
+          ${Shape()}
           
           <text x="50%" y="50%" text-anchor="middle" fill=${data.textColor} dy=".3em">${data.text}</text>
           </svg>`;
