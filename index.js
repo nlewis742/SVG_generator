@@ -25,7 +25,13 @@ inquirer
       type: "maxinput-input",
       name: "text",
       message: "Write upto 3 letters for an acronym for your logo.",
-      maxLength: 3
+      // function to limit to 3 characters long
+      validate: function(input) {
+        if (input.length > 3) {
+          return "Please enter upto 3 letters.";
+        }
+        return true;
+      }
     },
     {
       type: "input",
@@ -57,18 +63,19 @@ inquirer
             switch (data.shape) {
               case "square":
                 shape = new Square();
-                this.shapeColor(data.shapeColor);
+                shape.setColor(data.shapeColor);
               break;
               case "circle":
                 shape = new Circle();
-                this.shapeColor(data.shapeColor);
+                shape.setColor(data.shapeColor);
               break;
               case "triangle":
                 shape = new Triangle()
-                this.shapeColor(data.shapeColor);
+                shape.setColor(data.shapeColor);
               break;
             }
             return shape;
+            // console.log(shape);
           };
           const svg =
           `<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
