@@ -80,7 +80,7 @@ inquirer
           
           ${new Shape().render()}
           
-          <text x="50%" y="50%" text-anchor="middle" fill=${data.textColor} dy=".3em">${data.text}</text>
+          <text x="50%" y="50%" font-size="45" text-anchor="middle" fill=${data.textColor} dy=".3em">${data.text}</text>
           </svg>`;
           createSVG(svg);
         });
