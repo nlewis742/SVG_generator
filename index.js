@@ -16,13 +16,11 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 const { Circle, Triangle, Square } = require("./lib/Shape");
-const MaxLengthInputPrompt = require("inquirer-maxlength-input-prompt");
-inquirer.registerPrompt("maxinput", MaxLengthInputPrompt)
 
 inquirer
   .prompt([
     {
-      type: "maxinput-input",
+      type: "input",
       name: "text",
       message: "Write upto 3 letters for an acronym for your logo.",
       // function to limit to 3 characters long
@@ -80,7 +78,7 @@ inquirer
           const svg =
           `<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
           
-          ${Shape()}
+          ${new Shape().render()}
           
           <text x="50%" y="50%" text-anchor="middle" fill=${data.textColor} dy=".3em">${data.text}</text>
           </svg>`;
