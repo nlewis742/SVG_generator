@@ -48,34 +48,43 @@ inquirer
   ])
   .then((data) => {
     
+    function createSVG(data) {
+    fs.writeFile("logo.svg", data, (err) =>
+      err ? console.log(err) : console.log("successfully created logo"))
+  };
             function Shape(){
             let shape;
             switch (data.shape) {
               case "square":
                 shape = new Square();
-                shape.shapeColor(data.shapeColor);
+                this.shapeColor(data.shapeColor);
               break;
               case "circle":
-                shape = new Circle(data.shapeColor);
+                shape = new Circle();
+                this.shapeColor(data.shapeColor);
               break;
               case "triangle":
-                shape = new Triangle(data.shapeColor);
+                shape = new Triangle()
+                this.shapeColor(data.shapeColor);
               break;
             }
             return shape;
           };
+          const svg =
+          `<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+          
+          
+          <text x="50%" y="50%" text-anchor="middle" fill=${data.textColor} dy=".3em">${data.text}</text>
+          </svg>`;
+          createSVG(svg);
         });
-    const svg =
-         `<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
-  
-    
-      
-      <text x="50%" y="50%" text-anchor="middle" fill=${data.textColor} dy=".3em">${data.text}</text>
-      </svg>`;
-      function createSVG(data) {
-        fs.writeFile("logo.svg", data, (err) =>
-          err ? console.log(err) : console.log("successfully created logo"))
-      };
+        // <${Shape()} width="100%" height="100%" fill=${data.shapeColor} />
+        // function logo(text, textColor, shape, shapeColor) {
+        //   this.text = text;
+        //   this.textColor = textColor;
+        //   this.shape = shape;
+        //   this.shapeColor = shapeColor;
+        // }
 
     
 
@@ -93,11 +102,6 @@ inquirer
 //   })
 
 // //I need established objects for text color, shape, selection of shapes and color of shapes for a user to pull from.
-// function logo(text, textColor, shape, shapeColor) {
-//   this.text = text;
-//   this.textColor = textColor;
-//   this.shape = shape;
-//   this.shapeColor = shapeColor;
 //   this.create = function () {
 //       console.log("created");
 //   }
